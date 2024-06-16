@@ -1,5 +1,4 @@
 'use strict'
-
 const redis = require("@fastify/redis")
 const fastifyPlugin = require("fastify-plugin")
 
