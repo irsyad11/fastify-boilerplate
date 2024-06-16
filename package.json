@@ -17,7 +17,10 @@
     "fastify-mysql": "^2.2.0",
     "fastify-plugin": "^4.5.1",
     "jsonwebtoken": "^9.0.2",
-    "pino-pretty": "^11.2.0"
+    "pino-pretty": "^11.2.0",
+    "uuid": "^10.0.0",
+    "winston": "^3.13.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.3"
