@@ -3,6 +3,7 @@ const cors = require("@fastify/cors");
 const { routesConfig } = require("./routes/routes");
 const { logger, uuidv4 } = require("./utils/logger/winston");
 const chm = require("../database/mysql/chmSupport"); // import DB
+const redisMain = require("../database/redis/redisMain");
 // const redis = require("../database/redis/redis");
 const { attachDB } = require("../database/conHandler");
 
@@ -16,6 +17,7 @@ const buildApp = (opt = {}) => {
 
   // Register DB
   app.register(chm, { prefix: "chm" });
+  app.register(redisMain, { prefix: "redisMain" })
 
   // Register cors
   app.register(cors, {
@@ -30,7 +32,7 @@ const buildApp = (opt = {}) => {
 
     try {
       const mysqlCon = app.mysql;
-      const redisCon = [];
+      const redisCon = app.redis;
       attachDB(req, mysqlCon, redisCon);
     } catch (err) {
       insertLog(req, LEVEL_ERROR, LOG_ERROR, err);
