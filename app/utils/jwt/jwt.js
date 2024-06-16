@@ -55,10 +55,8 @@ const generateJwt = (data, exp = 3600) => {
       algorithm: "RS256",
       expiresIn: 3600,
     });
-    console.log(token);
     return { token, exp };
   } catch (err) {
-    console.log(err);
     throw new Error("Failed to generate JWT Token");
   }
 };

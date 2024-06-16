@@ -2,7 +2,7 @@
 const mysql = require("@fastify/mysql");
 const fastifyPlugin = require("fastify-plugin");
 
-const chm = async (fastify, options, done) => {
+const chm = (fastify, options, done) => {
   try {
     fastify.register(mysql, {
       promise: true,
@@ -13,18 +13,11 @@ const chm = async (fastify, options, done) => {
       password: process.env.DB_PASS,
       connectionLimit: parseInt(process.env.DB_CONLIMIT),
       database: process.env.DB_NAME,
-      // name: "chm",
-      // host: "localhost",
-      // port: 3306,
-      // user: "root",
-      // password: "Borsalino09@",
-      // connectionLimit: 50,
-      // database: "chm",
     });
-    // done();
+    done();
   } catch (err) {
     console.error("Cannot connect to chm_support : ", err);
-    done();
+    done(err);
   }
 };
 

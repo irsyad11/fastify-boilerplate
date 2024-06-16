@@ -2,7 +2,6 @@ const fastify = require("fastify");
 const cors = require("@fastify/cors");
 const { routesConfig } = require("./routes/routes");
 const { logger, uuidv4 } = require("./utils/logger/winston");
-
 const chm = require("../database/mysql/chmSupport"); // import DB
 // const redis = require("../database/redis/redis");
 const { attachDB } = require("../database/conHandler");

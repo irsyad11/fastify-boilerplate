@@ -1,5 +1,5 @@
 const createUsers = require("../../handlers/users/createUsers");
-const { addUsers } = require("./addUsers");
+const { addUsers } = require("../../schema/user/addUsers");
 
 const addUsersRoute = {
   method: "POST",
