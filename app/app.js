@@ -42,7 +42,7 @@ const buildApp = (opt = {}) => {
   // set error validation format
   app.setErrorHandler(errValidation);
 
-  // Set logger on each request with body
+  // Set logger on each request with body (attach to prehandler hook)
   app.addHook("preHandler", (req, reply, done) => {
     if (req.body.length) {
       let logPrehandler = {
@@ -55,14 +55,20 @@ const buildApp = (opt = {}) => {
     done();
   });
 
+  // Set logger on each response to capture response body
+  app.addHook("onSend", (req, reply, payload, done) => {
+    reply.raw.resBody = payload;
+    done();
+  })
+
   // Set logger on each response
   app.addHook("onResponse", (req, reply, done) => {
     let logOnSend = {
       resTime: reply.elapsedTime,
       resCode: reply.statusCode,
+      resBody: reply.raw.resBody,
     };
     insertLog(req, LEVEL_INFO, LOG_RESPONSE, logOnSend);
-    console.log(logOnSend);
     done();
   });
   // register routes

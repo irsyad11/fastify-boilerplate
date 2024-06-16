@@ -16,7 +16,7 @@ const insertLog = (request, level, type, data) => {
       type,
       data,
     };
-    request.winston(level, logData);
+    request.winston.log(level, logData);
   } catch (err) {
     throw new Error("Gagal menulis log");
   }
